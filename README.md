@@ -1,8 +1,8 @@
-== Quickfeed
+## Quickfeed
 
 This is a simple and fast RSS reader, intended to run on your own server and replace Google Reader. It supports multiple users on a single server.
 
-== Getting Started
+## Getting Started
 
 ```
 bundle install
