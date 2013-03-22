@@ -1,0 +1,12 @@
+<div class="span6 offset2">
+  <h2>Register</h2>
+<%= bootstrap_form_for(@user, :url => "/user/register", :method => :post, html: {class: 'well form-horizontal'}, help: :block) do |f| %>
+  <%= f.text_field :username, :tabindex => 1 %>
+  <%= f.text_field :email, :tabindex => 2 %>
+  <%= f.password_field :password, :tabindex => 3 %>
+  <%= f.password_field :password_confirmation, :label => 'Confirm Password', :tabindex => 4 %>
+  <%= f.control_group do %>
+    <%= f.primary "Register" %>
+  <% end %>
+<% end %>
+</div>

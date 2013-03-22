@@ -1,0 +1,11 @@
+<div class="offset2 span6">
+  <h2><small>Merge Groups Into</small> <%= @group.name %></h2>
+  <p>You can merge multiple existing groups together. The ones you select together will be joined into this one, and they will go away.</p>
+  <p>This cannot be undone!</p>
+  <%= bootstrap_form_for(@merge, :url => "/group/merge/#{@group.id}", :method => :post, :html => { :class => "well form-horizontal" }) do |f| %>
+    <%= f.select :group_ids, @select_groups, {}, {:multiple => true, :size => 15} %>
+    <%= f.control_group do %>
+      <%= f.primary "Merge" %>
+    <% end %>
+  <% end %>
+</div>

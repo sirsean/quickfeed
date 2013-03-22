@@ -1,0 +1,34 @@
+<h2 class="pull-left"><small>Group:</small> <%= @group.name %></h2>
+
+<p class="pull-right">
+  <%= link_to "Edit", "/group/edit/#{@group.id}", :class => "btn" %>
+  <%= link_to "Merge", "/group/merge/#{@group.id}", :class => "btn" %>
+  <%= link_to "Delete", "/group/delete/#{@group.id}", :confirm => "Are you sure you want to delete this group?", :class => "btn" %>
+</p>
+
+<div class="clearfix"></div>
+
+<% if @group.feeds.empty? %>
+<em>This group has no feeds. <%= link_to "You should go subscribe to some and add them to this group.", "/subscribe" %></em>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Feed Name</th>
+        <th>URL</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @group.feeds.each do |feed| %>
+      <tr>
+        <td><%= @feed_names[feed.id] %></td>
+        <td><%= feed.feed_url %></td>
+        <td>
+          <%= link_to "Remove Feed", "/group/remove_feed/#{@group.id}/#{feed.id}", :confirm => "Are you sure you want to remove this feed?" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

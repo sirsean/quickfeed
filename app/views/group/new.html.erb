@@ -1,0 +1,9 @@
+<div class="span6 offset2">
+  <h2>New Group</h2>
+  <%= bootstrap_form_for(@group, :url => "/group/new/#{@group.id}", :method => :post, :html => { :class => "form-horizontal well" }) do |f| %>
+    <%= f.text_field :name, :tabindex => 1 %>
+    <%= f.control_group do %>
+      <%= f.primary "Create" %>
+    <% end %>
+  <% end %>
+</div>

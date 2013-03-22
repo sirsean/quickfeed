@@ -1,0 +1,11 @@
+<div class="span6 offset2">
+  <h2>Complete Feed Subscription</h2>
+  <%= bootstrap_form_for(@feed_form, :url => "/subscribe/complete/#{@feed_id}", :method => :post, :html => { :id => "complete_subscription", :class => "well form-horizontal" }) do |f| %>
+    <%= f.text_field :feed_name, :value => @feed.title, :tabindex => 1 %>
+    <%= f.select :group_id, @select_groups %>
+    <%= f.text_field :group_name, :label => "New Group", :value => @feed.title, :tabindex => 2 %>
+    <%= f.control_group do %>
+      <%= f.primary "Complete Subscription" %>
+    <% end %>
+  <% end %>
+</div>
