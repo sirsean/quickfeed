@@ -141,7 +141,7 @@ class GroupController < ApplicationController
 
     @merge = MergeForm.new
 
-    @groups = Group.where(:user_id => current_user.id)
+    @groups = Group.where(:user_id => current_user.id).order("index_num asc")
     @select_groups = @groups.select{|g| g.id != @group.id }.map { |g| [g.name, g.id] }
 
     if request.post?

@@ -44,6 +44,7 @@ class Feed < ActiveRecord::Base
         from feeds
         join feeds_groups on feeds_groups.feed_id=feeds.id
         join groups on groups.id=feeds_groups.group_id and groups.user_id=:user_id
-        left outer join feed_names on feed_names.feed_id=feeds.id and feed_names.user_id=:user_id", { :user_id => user_id }])
+        left outer join feed_names on feed_names.feed_id=feeds.id and feed_names.user_id=:user_id
+        order by groups.index_num asc, feeds.id asc", { :user_id => user_id }])
   end
 end
