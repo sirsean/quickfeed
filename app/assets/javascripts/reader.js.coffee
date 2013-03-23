@@ -19,8 +19,15 @@ window.quickfeed.loadGroups = () -> $.ajax "/api/groups.json",
         if groups.length == 0
           $("#noGroupsModal").modal()
           $("div#items div#groupButtons").hide()
-        if currentGroup == null && groupsWithUnreadItems().length > 0
-          selectGroup(groupsWithUnreadItems()[0])
+        else
+          unreadGroups = groupsWithUnreadItems()
+          if unreadGroups.length == 0
+            $("div#items div#noItems").show()
+            $("div#items div#groupButtons").hide()
+          else
+            $("div#items div#noItems").hide()
+            if currentGroup == null && unreadGroups.length > 0
+              selectGroup(unreadGroups[0])
 
 window.quickfeed.loadItems = (groupId) -> 
     $("div#items ul").empty()
