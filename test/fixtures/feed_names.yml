@@ -1,11 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  feed_id: 1
-  user_id: 1
-  name: MyString
-
-two:
-  feed_id: 1
-  user_id: 1
-  name: MyString

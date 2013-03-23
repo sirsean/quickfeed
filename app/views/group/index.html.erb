@@ -1,3 +1,5 @@
+<div id="groups-index" style="display:none;"></div>
+
 <h2 class="pull-left">Groups</h2>
 
 <p class="pull-right">
@@ -12,13 +14,15 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>#</th>
       <th>Group Name</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @groups.each do |group| %>
-    <tr>
+    <tr data-group-id="<%= group.id %>">
+      <td><%= group.index_num + 1 %></td>
       <td><%= link_to group.name, "/group/show/#{group.id}" %></td>
       <td>
         <a href="/group/order/<%= group.id %>/top"><i class="icon-circle-arrow-up"></i></a>

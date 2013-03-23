@@ -70,6 +70,8 @@ class GroupController < ApplicationController
 
     group.delete
 
+    Group.reindex(current_user.id)
+
     flash.notice = "Group deleted"
     redirect_to "/group"
   end
@@ -128,7 +130,7 @@ class GroupController < ApplicationController
       end
     end
 
-    redirect_to "/group"
+    redirect_to "/group##{group_id}"
   end
 
   def merge

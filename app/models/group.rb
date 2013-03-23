@@ -38,4 +38,15 @@ class Group < ActiveRecord::Base
       max + 1
     end
   end
+
+  def self.reindex(user_id)
+    self.transaction do
+      self.where(:user_id => user_id).order("index_num asc").each_with_index do |group, index|
+        if group.index_num != index
+          group.index_num = index
+          group.save
+        end
+      end
+    end
+  end
 end

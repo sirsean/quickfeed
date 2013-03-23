@@ -1,13 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  username: MyString
-  password: MyString
-  email: MyString
-  timezone: MyString
-
-two:
-  username: MyString
-  password: MyString
-  email: MyString
-  timezone: MyString

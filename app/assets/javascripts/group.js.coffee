@@ -1,3 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+scrollToItem = (groupId) ->
+  if groupId
+      elem = $("tr[data-group-id=" + groupId + "]")
+      $("html, body").animate({
+        scrollTop: $(elem).offset().top - $("div.container.nav-collapse").height()
+      }, 0) if elem.length > 0
+
+if $("div#groups-index").length > 0
+    groupId = window.location.hash.replace("#", "")
+    console.log(groupId)
+    scrollToItem(groupId)
