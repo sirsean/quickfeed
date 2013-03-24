@@ -1,5 +1,5 @@
 require "form"
-require "rexml/Document"
+require "rexml/document"
 
 class ImportController < ApplicationController
   before_filter :require_login
