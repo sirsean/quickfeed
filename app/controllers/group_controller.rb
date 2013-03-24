@@ -163,6 +163,8 @@ class GroupController < ApplicationController
 
       @group.save
 
+      Group.reindex(current_user.id)
+
       flash.notice = "Merged!"
       redirect_to "/group/show/#{@group.id}"
     end
