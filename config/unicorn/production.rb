@@ -4,7 +4,7 @@
 
 application = "quickfeed"
 environment = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'production'
-app_path = "/home/quickfeed#{application}"
+app_path = "/home/quickfeed/#{application}"
 bundle_path = "#{app_path}/shared/bundle"
 
 timeout 30
