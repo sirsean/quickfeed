@@ -17,6 +17,19 @@ class Group < ActiveRecord::Base
       limit :limit", { :user_id => user_id, :group_id => self.id, :limit => limit, :last_item_id => last_item_id }])
   end
 
+  def unread_items(user_id)
+    Group.find_by_sql(["select items.*, (select read_items.item_id is null) as unread, feeds.title as feed_title, feed_names.name as feed_name
+      from items
+      join feeds_groups on feeds_groups.feed_id=items.feed_id
+      join groups on feeds_groups.group_id=groups.id
+      left outer join read_items on items.id=read_items.item_id and read_items.user_id=:user_id
+      join feeds on feeds.id=items.feed_id
+      left outer join feed_names on feed_names.feed_id=items.feed_id and feed_names.user_id=:user_id
+      where groups.id=:group_id
+      having unread=1
+      order by items.published_at desc, items.id desc", { :user_id => user_id, :group_id => self.id }])
+  end
+
   def num_items
     Group.find_by_sql(["select count(*) as num
       from items

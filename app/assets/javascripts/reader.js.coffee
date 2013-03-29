@@ -59,27 +59,28 @@ loadMoreItems = () ->
         consolidateMoreButton(data.num_items)
 
 readItem = (item) -> 
-    $.ajax "/api/read_items.json",
-      type: "POST",
-      dataType: "json",
-      data: {itemIds: [item.id]},
-      error: (xhr, status, error) ->
-          console.log(error)
-      success: (data, status, xhr) ->
-          console.log(data)
-
-          if item.unread
-            currentGroup.unread -= 1
-            consolidateGroup(currentGroup)
-
-          item.unread = 0
-          existing = $("div#items ul li[data-item-id=" + item.id + "]").removeClass("unread")
-
-markAllRead = () ->
-    $.ajax "/api/read_items.json",
+    if item.unread
+      $.ajax "/api/read_item.json",
         type: "POST",
         dataType: "json",
-        data: {itemIds: item.id for item in items when item.unread}
+        data: {itemId: item.id},
+        error: (xhr, status, error) ->
+            console.log(error)
+        success: (data, status, xhr) ->
+            console.log(data)
+
+            if item.unread
+              currentGroup.unread -= 1
+              consolidateGroup(currentGroup)
+
+            item.unread = 0
+            existing = $("div#items ul li[data-item-id=" + item.id + "]").removeClass("unread")
+
+markAllRead = () ->
+    $.ajax "/api/mark_all_read.json",
+        type: "POST",
+        dataType: "json",
+        data: {groupId: currentGroup.id},
         success: (data, status, xhr) ->
             currentGroup.unread = 0
             consolidateGroup(currentGroup)

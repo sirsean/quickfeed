@@ -39,7 +39,8 @@ Quickfeed::Application.routes.draw do
   get "api/groups"
   get "api/items"
   post "api/add_feed"
-  post "api/read_items"
+  post "api/read_item"
+  post "api/mark_all_read"
 
   match "reader" => "reader#index"
   get "reader/index"

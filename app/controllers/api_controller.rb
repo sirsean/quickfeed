@@ -18,18 +18,25 @@ class ApiController < ApplicationController
     }
   end
 
-  def read_items
-    item_ids = params[:itemIds]
-    if item_ids
-      ReadItem.transaction do
-        item_ids.each do |item_id|
-          if ReadItem.where(:item_id => item_id, :user_id => current_user.id).empty?
-            ReadItem.create(:item_id => item_id, :user_id => current_user.id)
-          end
-        end
+  def read_item
+    item_id = params[:itemId]
+    ReadItem.transaction do
+      if ReadItem.where(:item_id => item_id, :user_id => current_user.id).empty?
+        ReadItem.create(:item_id => item_id, :user_id => current_user.id)
       end
     end
-    render :json => { :item_ids => item_ids }
+    render :json => { :item_id => item_id }
+  end
+
+  def mark_all_read
+    group_id = params[:groupId]
+    group = Group.find(group_id)
+    ReadItem.transaction do
+      group.unread_items(current_user.id).each do |item|
+        ReadItem.create(:item_id => item.id, :user_id => current_user.id)
+      end
+    end
+    render :json => { :group_id => group_id }
   end
 
   def add_feed
