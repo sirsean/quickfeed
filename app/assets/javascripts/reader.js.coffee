@@ -86,6 +86,7 @@ consolidateGroup = (group) ->
     $(a).text(group.name + " (" + parseInt(group.unread,10) + ")")
     if currentGroup != null and group.id == currentGroup.id
       $(li).addClass("active")
+      currentGroup = group
     $(li).append(a)
 
     $(a).click((event) ->
@@ -113,7 +114,7 @@ removeGroup = (group) ->
 selectGroup = (group) ->
   console.log("selecting group: " + group.name)
   li = $("div#groups ul li[data-group-id=" + group.id + "]")
-  if currentGroup != group
+  if currentGroup != null && currentGroup.id != group.id
     oldGroup = currentGroup
   else
     oldGroup = null
