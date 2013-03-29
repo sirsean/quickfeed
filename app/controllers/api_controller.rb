@@ -9,8 +9,13 @@ class ApiController < ApplicationController
   def items
     puts params.inspect
     group_id = params[:groupId]
-    @items = Group.find(group_id).items(current_user.id)
-    respond_with @items
+    last_item_id = params[:lastItemId].to_i
+    group = Group.find(group_id)
+    @items = group.items(current_user.id, 40, last_item_id)
+    render :json => {
+      :num_items => group.num_items,
+      :items => @items
+    }
   end
 
   def read_items

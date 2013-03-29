@@ -42,8 +42,21 @@ window.quickfeed.loadItems = (groupId) ->
     success: (data, status, xhr) ->
         console.log(data)
         $("div#items ul").empty()
-        items = data
+        items = data.items
         consolidateItem item for item in items
+        consolidateMoreButton(data.num_items)
+
+loadMoreItems = () ->
+    $.ajax "/api/items.json",
+    type: "GET",
+    dataType: "json",
+    data: { groupId: currentGroup.id, lastItemId: items[items.length-1].id },
+    success: (data, status, xhr) ->
+        console.log(data)
+        items = items.concat(data.items)
+        console.log(items)
+        consolidateItem item for item in data.items
+        consolidateMoreButton(data.num_items)
 
 readItem = (item) -> 
     $.ajax "/api/read_items.json",
@@ -170,6 +183,12 @@ clickItem = (item) ->
   else
     readItem(item)
     expandItem(item)
+
+consolidateMoreButton = (numItems) ->
+  if $("div#items > ul > li").length < numItems
+    $("div#items > div#itemListButtons > a#moreItems").show()
+  else
+    $("div#items > div#itemListButtons > a#moreItems").hide()
 
 unselectItem = () ->
     selectedItem = null
@@ -343,6 +362,12 @@ $("div#items div#groupButtons a#goToGroup").click((event) ->
 $("div#items div#groupButtons a#markAllRead").click((event) ->
     if currentGroup != null
       markAllRead()
+    event.preventDefault()
+)
+
+$("div#items > div#itemListButtons > a#moreItems").click((event) ->
+    if currentGroup != null
+      loadMoreItems()
     event.preventDefault()
 )
 
