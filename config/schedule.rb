@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 15.minutes do
-  rake "cron:fifteen"
+every 1.minute do
+  rake "cron:one"
 end

@@ -1,5 +1,5 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :title, :url, :feed_url
+  attr_accessible :title, :url, :feed_url, :last_fetched_at
   has_and_belongs_to_many :groups
   has_many :items
 
@@ -37,6 +37,50 @@ class Feed < ActiveRecord::Base
       end
     end
     puts "Done updating all feeds"
+  end
+
+  def self.update_next
+    puts "Updating next block of feeds"
+
+    start_time = Time.now
+
+    num_total_feeds = Feed.num_feeds_with_at_least_one_group
+
+    models = self.least_recently_fetched(num_total_feeds / 15)
+
+    # first, update the last_fetched_at field so if this takes too long
+    # the next run will just skip on to the next batch instead of repeating
+    # this one
+    models.each do |model|
+      model.last_fetched_at = Time.now
+      model.save
+    end
+
+    feeds = Feedzirra::Feed.fetch_and_parse(models.map{|m| m.feed_url})
+    models.each do |model|
+      if feeds.has_key?(model.feed_url)
+        model.merge(feeds[model.feed_url])
+        model.save
+      end
+    end
+
+    finish_time = Time.now
+
+    puts "Updated #{num_total_feeds/15} feeds in #{finish_time-start_time} seconds"
+  end
+
+  def self.num_feeds_with_at_least_one_group
+    self.find_by_sql(["select count(distinct(feeds.id)) as num
+      from feeds
+      join feeds_groups on feeds_groups.feed_id=feeds.id"]).first.num
+  end
+
+  def self.least_recently_fetched(limit)
+    self.find_by_sql(["select distinct feeds.*
+      from feeds
+      join feeds_groups on feeds_groups.feed_id=feeds.id
+      order by last_fetched_at asc
+      limit :limit", {:limit => limit}])
   end
 
   def self.by_user_id(user_id)
