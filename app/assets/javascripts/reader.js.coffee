@@ -1,8 +1,17 @@
+currentVersion = null
 groups = null
 currentGroup = null
 items = null
 currentItem = null
 selectedItem = null
+
+versionMismatch = () ->
+    console.log("version mismatch")
+    $("#version-mismatch").show()
+    $("a").unbind("click")
+    $("a").click((event) ->
+        event.preventDefault()
+    )
 
 window.quickfeed.loadGroups = () -> $.ajax "/api/groups.json",
     type: "GET",
@@ -13,7 +22,9 @@ window.quickfeed.loadGroups = () -> $.ajax "/api/groups.json",
         console.log(error)
     success: (data, status, xhr) ->
         console.log(data)
-        groups = data
+        if currentVersion == null
+          currentVersion = data.version
+        groups = data.groups
         consolidateGroup group for group in groups
         console.log(currentGroup)
         if groups.length == 0
@@ -28,6 +39,8 @@ window.quickfeed.loadGroups = () -> $.ajax "/api/groups.json",
             $("div#items div#noItems").hide()
             if currentGroup == null && unreadGroups.length > 0
               selectGroup(unreadGroups[0])
+        if currentVersion != data.version
+          versionMismatch()
 
 window.quickfeed.loadItems = (groupId) -> 
     $("div#items ul").empty()

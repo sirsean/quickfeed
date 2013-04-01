@@ -3,7 +3,10 @@ class ApiController < ApplicationController
 
   def groups
     @groups = Group.by_user_id_with_unread(current_user.id)
-    respond_with @groups
+    render :json => {
+      :version => AppVersion.current.version,
+      :groups => @groups,
+    }
   end
 
   def items
