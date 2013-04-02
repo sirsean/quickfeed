@@ -31,6 +31,7 @@ class UserController < ApplicationController
     if request.post?
       user_data = params[:user]
       @user = User.new(:username => user_data[:username], :email => user_data[:email])
+      @user.signup_code = user_data[:signup_code]
       if not user_data[:password].empty?
         @user.password = user_data[:password]
         @user.password_confirmation = user_data[:password_confirmation]

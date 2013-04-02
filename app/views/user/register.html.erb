@@ -5,6 +5,9 @@
   <%= f.text_field :email, :tabindex => 2 %>
   <%= f.password_field :password, :tabindex => 3 %>
   <%= f.password_field :password_confirmation, :label => 'Confirm Password', :tabindex => 4 %>
+  <% if signup_codes_exist? %>
+    <%= f.text_field :signup_code, :tabindex => 5 %>
+  <% end %>
   <%= f.control_group do %>
     <%= f.primary "Register" %>
   <% end %>

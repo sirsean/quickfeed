@@ -1,5 +1,16 @@
+class SignupCodeValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    if SignupCode.codes_exist?
+      if not SignupCode.has_code?(value)
+        record.errors[attribute] << "must enter a valid signup code"
+      end
+    end
+  end
+end
+
 class User < ActiveRecord::Base
   attr_accessible :id, :email, :password, :password_confirmation, :timezone, :username
+  attr_accessor :signup_code
   has_many :groups
 
   has_secure_password
@@ -17,6 +28,8 @@ class User < ActiveRecord::Base
   validates :password,
     :length => { :minimum => 8, :if => :validate_password? },
     :confirmation => { :if => :validate_password? }
+
+  validates :signup_code, :signup_code => true
 
   private
 
