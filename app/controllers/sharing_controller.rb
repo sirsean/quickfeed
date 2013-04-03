@@ -31,7 +31,7 @@ class SharingController < ApplicationController
     user_access_token = UserAccessToken.create(
       :user_id => current_user.id,
       :app => @app.app,
-      :token => access_token_response,
+      :token => access_token_response["access_token"],
     )
 
     session.delete(:oauth_request_token)

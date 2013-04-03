@@ -26,21 +26,28 @@ class PocketShare
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     post_response = http.request(post_request)
+    puts post_response.code
+    puts post_response.body
     JSON.parse(post_response.body)
   end
 
   def self.share(app, token, item)
+    puts "Sharing #{item}"
     uri = URI.parse("https://getpocket.com/v3/add")
-    post_request = Net::HTTP::Post.new(uri.path, {"Content-Type" => "application/json; charset=UTF-8"})
+    post_request = Net::HTTP::Post.new(uri.path, {"Content-Type" => "application/json; charset=UTF-8", "X-Accept" => "application/json"})
     post_request.body = {
-      :url => URI.encode_www_form_component(item.url),
-      :title => URI.encode_www_form_component(item.title),
+      :url => item.url,
+      :title => item.title,
       :consumer_key => app.consumer_key,
       :access_token => token.token,
     }.to_json
+    puts post_request.body
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
+    puts "Sending to Pocket..."
     post_response = http.request(post_request)
+    puts post_response.code
+    puts post_response.body
     JSON.parse(post_response.body)
   end
 
