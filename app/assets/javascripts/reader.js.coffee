@@ -100,6 +100,22 @@ markAllRead = () ->
             item.unread = 0 for item in items
             $("div#items ul li").removeClass("unread")
 
+shareToPocket = () ->
+    if selectedItem != null
+      $.ajax "/api/share.json",
+      type: "POST",
+      dataType: "json",
+      data: {itemId: selectedItem.id, app: "pocket"},
+      error: (xhr, status, error) ->
+        console.log(error)
+      success: (data, status, xhr) ->
+        if data.success
+          if selectedItem.unread
+            currentGroup.unread -= 1
+            consolidateGroup(currentGroup)
+          selectedItem.unread = 0
+          $("div#items ul li[data-item-id=" + selectedItem.id + "]").removeClass("unread")
+
 groupsWithUnreadItems = () ->
     groups.filter (group) -> group.unread > 0
 
@@ -340,6 +356,7 @@ registerKeyboardShortcuts = () ->
       75: "k",
       86: "v",
       65: "a",
+      82: "r",
     }
     $(document).keydown((event) ->
         #console.log(event.which)
@@ -362,6 +379,8 @@ registerKeyboardShortcuts = () ->
                   expandPrevious()
               when "v"
                   openCurrentItemInNewTab()
+              when "r"
+                  shareToPocket()
     )
 
 fixGroupsHeight = () ->

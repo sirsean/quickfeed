@@ -1,4 +1,10 @@
 Quickfeed::Application.routes.draw do
+  match "sharing" => "sharing#index"
+  get "sharing/index"
+  match "sharing/:app_name/start" => "sharing#start"
+  match "sharing/:app_name/finish" => "sharing#finish"
+  match "sharing/:app_name/remove" => "sharing#remove"
+
   match "home" => "home#index"
   get "home/index"
 
@@ -41,6 +47,7 @@ Quickfeed::Application.routes.draw do
   post "api/add_feed"
   post "api/read_item"
   post "api/mark_all_read"
+  post "api/share"
 
   match "reader" => "reader#index"
   get "reader/index"

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401204125) do
+ActiveRecord::Schema.define(:version => 20130402153800) do
+
+  create_table "app_consumer_keys", :force => true do |t|
+    t.string   "app"
+    t.string   "consumer_key"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "app_consumer_keys", ["app"], :name => "index_app_consumer_keys_on_app", :unique => true
 
   create_table "app_versions", :force => true do |t|
     t.integer  "version"
@@ -91,6 +100,17 @@ ActiveRecord::Schema.define(:version => 20130401204125) do
   end
 
   add_index "signup_codes", ["code"], :name => "index_signup_codes_on_code", :unique => true
+
+  create_table "user_access_tokens", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "app"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_access_tokens", ["user_id", "app"], :name => "index_user_access_tokens_on_user_id_and_app", :unique => true
+  add_index "user_access_tokens", ["user_id"], :name => "index_user_access_tokens_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"

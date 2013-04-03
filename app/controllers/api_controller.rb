@@ -1,3 +1,5 @@
+require "pocket_share"
+
 class ApiController < ApplicationController
   respond_to :json
 
@@ -57,5 +59,31 @@ class ApiController < ApplicationController
       model.save
     end
     render :json => { :feed_id => model.id }
+  end
+
+  def share
+    item_id = params[:itemId]
+    app_name = params[:app]
+
+    app = AppConsumerKey.where(:app => app_name).first
+    token = UserAccessToken.where(:user_id => current_user.id, :app => app_name).first
+    item = Item.find(item_id)
+
+    if token.nil?
+      render :json => {
+        :success => false,
+        :error => "No sharing token"
+      }
+    else
+      PocketShare.share(app, token, item)
+      ReadItem.transaction do
+        if ReadItem.where(:item_id => item.id, :user_id => current_user.id).empty?
+          ReadItem.create(:item_id => item.id, :user_id => current_user.id)
+        end
+      end
+      render :json => {
+        :success => true
+      }
+    end
   end
 end
