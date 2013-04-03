@@ -30,9 +30,21 @@ class PocketShare
   end
 
   def self.share(app, token, item)
+    uri = URI.parse("https://getpocket.com/v3/add")
+    post_request = Net::HTTP::Post.new(uri.path, {"Content-Type" => "application/json; charset=UTF-8"})
+    post_request.body = {
+      :url => URI.encode_www_form_component(item.url),
+      :title => URI.encode_www_form_component(item.title),
+      :consumer_key => app.consumer_key,
+      :access_token => token.token,
+    }.to_json
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    post_response = http.request(post_request)
+    JSON.parse(post_response.body)
   end
 
-  def redirect_uri(host, app)
+  def self.redirect_uri(host, app)
     "http://#{host}/sharing/#{app.app}/finish"
   end
 end
