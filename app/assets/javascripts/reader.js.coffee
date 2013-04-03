@@ -43,6 +43,8 @@ window.quickfeed.loadGroups = () -> $.ajax "/api/groups.json",
           versionMismatch()
 
 window.quickfeed.loadItems = (groupId) -> 
+    $("div#items").hide()
+    $("div#items-loading").show()
     $("div#items ul").empty()
     $.ajax "/api/items.json",
     type: "GET",
@@ -55,6 +57,8 @@ window.quickfeed.loadItems = (groupId) ->
     success: (data, status, xhr) ->
         console.log(data)
         $("div#items ul").empty()
+        $("div#items-loading").hide()
+        $("div#items").show()
         items = data.items
         consolidateItem item for item in items
         consolidateMoreButton(data.num_items)
