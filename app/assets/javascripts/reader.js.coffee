@@ -357,6 +357,7 @@ registerKeyboardShortcuts = () ->
       86: "v",
       65: "a",
       82: "r",
+      77: "m",
     }
     $(document).keydown((event) ->
         #console.log(event.which)
@@ -364,6 +365,7 @@ registerKeyboardShortcuts = () ->
           if event.shiftKey
             switch which[event.which]
               when "a" then markAllRead()
+              when "m" then loadMoreItems()
           else
             switch which[event.which]
               when "n"
