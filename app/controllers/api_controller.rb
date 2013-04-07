@@ -82,7 +82,8 @@ class ApiController < ApplicationController
         end
       end
       render :json => {
-        :success => true
+        :success => true,
+        :item_id => item.id,
       }
     end
   end

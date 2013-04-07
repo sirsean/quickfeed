@@ -91,7 +91,7 @@ readItem = (item) ->
               consolidateGroup(currentGroup)
 
             item.unread = 0
-            existing = $("div#items ul li[data-item-id=" + item.id + "]").removeClass("unread")
+            existing = $("div#items ul li[data-item-id=" + data.item_id + "]").removeClass("unread")
 
 markAllRead = () ->
     $.ajax "/api/mark_all_read.json",
@@ -118,7 +118,7 @@ shareToPocket = () ->
             currentGroup.unread -= 1
             consolidateGroup(currentGroup)
           selectedItem.unread = 0
-          $("div#items ul li[data-item-id=" + selectedItem.id + "]").removeClass("unread")
+          $("div#items ul li[data-item-id=" + data.item_id + "]").removeClass("unread")
 
 groupsWithUnreadItems = () ->
     groups.filter (group) -> group.unread > 0
