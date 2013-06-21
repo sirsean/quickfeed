@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402153800) do
+ActiveRecord::Schema.define(:version => 20130621141517) do
 
   create_table "app_consumer_keys", :force => true do |t|
     t.string   "app"
@@ -73,12 +73,12 @@ ActiveRecord::Schema.define(:version => 20130402153800) do
     t.integer  "feed_id"
     t.string   "title"
     t.text     "summary"
-    t.text     "content"
+    t.text     "content",      :limit => 2147483647
     t.text     "url"
     t.string   "author"
     t.datetime "published_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   add_index "items", ["feed_id"], :name => "index_items_on_feed_id"
