@@ -20,7 +20,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="article" ng-repeat="article in articles" data-article-id="{{article.id}}" data-current="{{article == current}}" data-focused="{{article == focused}}" data-unread="{{article.unread == 1}}">
-      <div class="title" ng-click="chooseArticle(article)">{{article.title}}</div>
+      <div class="title" ng-click="chooseArticle(article)" ng-bind-html-unsafe="article.title"></div>
       <div class="date">{{article.published_at|date:"M/d/yyyy hh:mm a"}}</div>
       <div class="clearfix"></div>
       <div class="full">
