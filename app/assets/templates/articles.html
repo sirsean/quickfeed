@@ -1,0 +1,44 @@
+<div ng-switch on="state">
+  <div ng-switch-when="none">
+    <p>...</p>
+  </div>
+  <div ng-switch-when="loading" style="margin-top: 30%;">
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 100%;"></div>
+    </div>
+  </div>
+  <div ng-switch-when="empty">
+    <p>There are no items</p>
+  </div>
+  <div ng-switch-when="error">
+    <p>There was an error</p>
+  </div>
+  <div ng-switch-default>
+    <div class="pull-right">
+      <div class="btn" ng-click="markAllRead()">Mark All Read</div>
+      <div class="btn" ng-click="goToCurrentGroup()">Go To Group</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="article" ng-repeat="article in articles" data-article-id="{{article.id}}" data-current="{{article == current}}" data-focused="{{article == focused}}" data-unread="{{article.unread == 1}}">
+      <div class="title" ng-click="chooseArticle(article)">{{article.title}}</div>
+      <div class="date">{{article.published_at|date:"M/d/yyyy hh:mm a"}}</div>
+      <div class="clearfix"></div>
+      <div class="full">
+        <div class="article-contents">
+          <div>
+            <a class="title-link" href="{{article.url}}" target="_blank">{{article.title}}</a>
+          </div>
+          <div class="author">{{article.author}}</div>
+          <div class="feed-name">{{article.feed_name||article.feed_title}}</div>
+          <div class="clearfix"></div>
+          <div class="summary" ng-bind-html-unsafe="article.summary"></div>
+          <hr data-visible="{{article.summary != null && article.content != null}}" />
+          <div class="content"></div>
+        </div>
+      </div>
+    </div>
+    <div id="bottomButtons" class="text-center" data-hidden="{{numArticles-articles.length==0}}">
+      <div id="moreArticles" class="btn" ng-click="loadMoreArticles()">More</div>
+    </div>
+  </div>
+</div>

@@ -1,42 +1,51 @@
-<div class="row">
-  <div class="span3"></div>
-  <div id="groups" class="span3">
-    <div id="version-mismatch" style="display:none;">
-      We've released a new version! Please refresh your browser.
+<div ng-app="reader">
+  <div ng-controller="KeyCtrl"></div>
+  <div class="row">
+    <groups class="span3"></groups>
+    <articles class="span9 offset3"></articles>
+  </div>
+<!--
+  <div class="row">
+    <div class="span3"></div>
+    <div id="groups" class="span3">
+      <div id="version-mismatch" style="display:none;">
+        We've released a new version! Please refresh your browser.
+      </div>
+      <ul>
+      </ul>
     </div>
-    <ul>
-    </ul>
+
+    <div id="items-loading" class="span9" style="display:none; margin-top: 30%;">
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+    </div>
+    <div id="items" class="span9" style="display:none;">
+      <div id="noItems" style="display:none;"><em>There are no items... wait for new ones, or go subscribe to more feeds!</em></div>
+      <div id="groupButtons" style="display:none;">
+        <a id="goToGroup" href="#" class="btn pull-right">Go To Group</a>
+        <a id="markAllRead" href="#" class="btn pull-right">Mark All Read</a>
+        <div class="clearfix"></div>
+      </div>
+      <ul>
+      </ul>
+      <div id="itemListButtons" class="text-center">
+        <a id="moreItems" href="#" class="btn">More Items</a>
+      </div>
+    </div>
   </div>
 
-  <div id="items-loading" class="span9" style="display:none; margin-top: 30%;">
-    <div class="progress progress-striped active">
-      <div class="bar" style="width: 100%;"></div>
+  <div id="noGroupsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="noGroupsModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <h3 id="noGroupsModalLabel">No Groups</h3>
+    </div>
+    <div class="modal-body">
+      <p>You have no groups or feeds. You should go subscribe to some, or import some subscriptions.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="/subscribe" class="btn btn-primary">Subscribe</a>
+      <a href="/import" class="btn btn-primary">Import</a>
     </div>
   </div>
-  <div id="items" class="span9" style="display:none;">
-    <div id="noItems" style="display:none;"><em>There are no items... wait for new ones, or go subscribe to more feeds!</em></div>
-    <div id="groupButtons" style="display:none;">
-      <a id="goToGroup" href="#" class="btn pull-right">Go To Group</a>
-      <a id="markAllRead" href="#" class="btn pull-right">Mark All Read</a>
-      <div class="clearfix"></div>
-    </div>
-    <ul>
-    </ul>
-    <div id="itemListButtons" class="text-center">
-      <a id="moreItems" href="#" class="btn">More Items</a>
-    </div>
-  </div>
-</div>
-
-<div id="noGroupsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="noGroupsModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <h3 id="noGroupsModalLabel">No Groups</h3>
-  </div>
-  <div class="modal-body">
-    <p>You have no groups or feeds. You should go subscribe to some, or import some subscriptions.</p>
-  </div>
-  <div class="modal-footer">
-    <a href="/subscribe" class="btn btn-primary">Subscribe</a>
-    <a href="/import" class="btn btn-primary">Import</a>
-  </div>
+-->
 </div>

@@ -15,6 +15,7 @@ class ApiController < ApplicationController
     puts params.inspect
     group_id = params[:groupId]
     last_item_id = params[:lastItemId].to_i
+    #sleep 1
     group = Group.find(group_id)
     @items = group.items(current_user.id, 40, last_item_id)
     render :json => {

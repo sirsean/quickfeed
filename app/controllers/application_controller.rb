@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :logged_in?
+  after_filter :set_csrf_cookie
 
   def current_user
     if session[:user_id]
@@ -24,5 +25,17 @@ class ApplicationController < ActionController::Base
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
+  end
+
+  def set_csrf_cookie
+    if protect_against_forgery?
+      cookies["XSRF-TOKEN"] = form_authenticity_token
+    end
+  end
+
+  protected
+
+  def verified_request?
+    super || form_authenticity_token == request.headers["X-XSRF-TOKEN"]
   end
 end
