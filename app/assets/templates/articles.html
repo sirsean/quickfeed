@@ -26,7 +26,7 @@
       <div class="full">
         <div class="article-contents">
           <div>
-            <a class="title-link" href="{{article.url}}" target="_blank">{{article.title}}</a>
+            <a class="title-link" href="{{article.url}}" target="_blank" ng-bind-html-unsafe="article.title"></a>
           </div>
           <div class="author">{{article.author}}</div>
           <div class="feed-name">{{article.feed_name||article.feed_title}}</div>
