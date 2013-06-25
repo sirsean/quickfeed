@@ -11,7 +11,7 @@ Reader.factory("Bus", ($rootScope) ->
   return bus
 )
 
-Reader.controller("GroupsCtrl", ($scope, $http, Bus) ->
+Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
   $scope.version = null
   $scope.current = null
 
@@ -70,9 +70,9 @@ Reader.controller("GroupsCtrl", ($scope, $http, Bus) ->
   setInterval ->
     groups()
   , 30000
-)
+]
 
-Reader.controller "ArticlesCtrl", ($scope, $http, Bus) ->
+Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
   $scope.current = null
   $scope.focused = null
 
@@ -219,8 +219,9 @@ Reader.controller "ArticlesCtrl", ($scope, $http, Bus) ->
       $("html, body").animate({
         scrollTop: $(element).offset().top - $("div.container.nav-collapse").height() - 2
       }, 0)
+]
 
-Reader.controller("KeyCtrl", ($scope, $document, Bus) ->
+Reader.controller "KeyCtrl", ["$scope", "$document", "Bus", ($scope, $document, Bus) ->
   which = {
     78: "n",
     79: "o",
@@ -241,7 +242,7 @@ Reader.controller("KeyCtrl", ($scope, $document, Bus) ->
         else
           if which[event.which]
             Bus.broadcast("key", which[event.which])
-)
+]
 
 Reader.directive "groups", () ->
   restrict: "E",
