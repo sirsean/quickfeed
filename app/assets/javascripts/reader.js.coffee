@@ -1,6 +1,6 @@
 window.Reader = angular.module("reader", [])
 
-Reader.factory("Bus", ($rootScope) ->
+Reader.factory "Bus", ["$rootScope", ($rootScope) ->
   bus = {}
   bus.broadcast = (name, obj) ->
     this.name = name
@@ -9,7 +9,7 @@ Reader.factory("Bus", ($rootScope) ->
   bus.broadcastItem = ->
     $rootScope.$broadcast(this.name)
   return bus
-)
+]
 
 Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
   $scope.version = null
