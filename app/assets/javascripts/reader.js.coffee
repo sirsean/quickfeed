@@ -123,7 +123,7 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
     fixGroupsHeight()
   setInterval ->
     $scope.refreshGroups()
-  , 5000
+  , 30000
 ]
 
 Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
