@@ -92,7 +92,6 @@ Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus
           $scope.state = "empty"
         else
           $scope.state = null
-        $("#bottomButtons").hide()
       .error () ->
         $scope.state = "error"
 
