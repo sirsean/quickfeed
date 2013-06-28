@@ -86,7 +86,7 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
 
   nextGroup = ->
     next = null
-    groups = nonEmpty()
+    groups = $scope.groups.filter (group) -> group.unread > 0 or ($scope.focused != null and group.id == $scope.focused.id) or ($scope.current != null and group.id == $scope.current.id)
     if groups != null and groups.length > 0
       if $scope.focused == null
         next = groups[0]
@@ -100,7 +100,7 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
 
   previousGroup = ->
     prev = null
-    groups = nonEmpty()
+    groups = $scope.groups.filter (group) -> group.unread > 0 or ($scope.focused != null and group.id == $scope.focused.id) or ($scope.current != null and group.id == $scope.current.id)
     if groups != null and groups.length > 0
       if $scope.focused != null
         index = groups.indexOf($scope.focused)
