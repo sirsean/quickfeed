@@ -9,6 +9,10 @@ groups {
     cursor: pointer;
 }
 
+.group:hover {
+    text-decoration: underline;
+}
+
 .group[data-empty=true] {
     display: none;
 }
@@ -24,6 +28,10 @@ groups {
 
 articles {
     z-index: 200;
+}
+
+.article .title:hover {
+    text-decoration: underline;
 }
 
 .article[data-focused=true] {
