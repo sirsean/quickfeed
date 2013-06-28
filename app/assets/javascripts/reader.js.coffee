@@ -46,6 +46,8 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
     switch Bus.obj
       when "A"
         markAllRead()
+      when "u"
+        $scope.chooseGroup($scope.current)
 
   $scope.$on "decrementGroupUnread", ->
     if Bus.obj
@@ -231,16 +233,17 @@ Reader.controller "KeyCtrl", ["$scope", "$document", "Bus", ($scope, $document, 
     65: "a",
     82: "r",
     77: "m",
+    85: "u",
   }
   $document.keydown (e) ->
     $scope.$apply ->
-      if !event.altKey && !event.metaKey
-        if event.shiftKey
-          if which[event.which]
-            Bus.broadcast("key", which[event.which].toUpperCase())
+      if !e.altKey && !e.metaKey
+        if e.shiftKey
+          if which[e.which]
+            Bus.broadcast("key", which[e.which].toUpperCase())
         else
-          if which[event.which]
-            Bus.broadcast("key", which[event.which])
+          if which[e.which]
+            Bus.broadcast("key", which[e.which])
 ]
 
 Reader.directive "groups", () ->
