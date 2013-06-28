@@ -2,7 +2,7 @@
   <div id="version-mismatch" style="display:none;">
     We've released a new version! Please refresh your browser.
   </div>
-  <div class="group" ng-repeat="group in groups" ng-click="chooseGroup(group)" data-empty="{{group.unread == 0}}" data-current="{{group == current}}">
+  <div class="group" ng-repeat="group in groups" ng-click="chooseGroup(group)" data-column-selected="{{column == 'groups'}}" data-empty="{{group.unread == 0}}" data-current="{{group == current}}" data-focused="{{group == focused}}">
     {{group.name}} ({{group.unread|number}})
   </div>
 </div>

@@ -14,6 +14,8 @@ Reader.factory "Bus", ["$rootScope", ($rootScope) ->
 Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
   $scope.version = null
   $scope.current = null
+  $scope.focused = null
+  $scope.column = null
 
   groups = ->
     $http.get("/api/groups.json").success (response) ->
@@ -21,14 +23,19 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
         $("#version-mismatch").show()
       $scope.version = response.version
       $scope.groups = response.groups
-      nonEmpty = response.groups.filter (group) -> group.unread > 0
+      groups = nonEmpty()
       if $scope.current == null
-        if nonEmpty.length > 0
-          $scope.current = nonEmpty[0]
+        if groups.length > 0
+          $scope.current = groups[0]
+          Bus.broadcast("setColumn", "articles")
         else
           $scope.current = null
       else
         $scope.current = ($scope.groups.filter (group) -> group.id == $scope.current.id)[0]
+      if $scope.focused != null
+        $scope.focused = ($scope.groups.filter (group) -> group.id == $scope.focused.id)[0]
+
+  $scope.refreshGroups = groups
 
   $scope.chooseGroup = (group) ->
     if group.id == $scope.current.id
@@ -39,8 +46,12 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
     }, 0)
 
   $scope.$watch("current.id", () ->
+    $scope.focused = $scope.current
     Bus.broadcast("chooseGroup", $scope.current)
   )
+
+  $scope.$on "setColumn", ->
+    $scope.column = Bus.obj
 
   $scope.$on "key", ->
     switch Bus.obj
@@ -49,12 +60,53 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
       when "u"
         $scope.chooseGroup($scope.current)
 
+    if $scope.column == "groups"
+      switch Bus.obj
+        when "j", "n"
+          group = nextGroup()
+          if group != null
+            $scope.focused = group
+        when "k", "p"
+          group = previousGroup()
+          if group != null
+            $scope.focused = group
+        when "o"
+          if $scope.focused != null
+            $scope.current = $scope.focused
+
   $scope.$on "decrementGroupUnread", ->
     if Bus.obj
       $scope.current.unread--
 
   $scope.$on "markGroupRead", ->
     markAllRead()
+
+  nonEmpty = ->
+    $scope.groups.filter (group) -> group.unread > 0
+
+  nextGroup = ->
+    next = null
+    groups = nonEmpty()
+    if groups != null and groups.length > 0
+      if $scope.focused == null
+        next = groups[0]
+      else
+        index = groups.indexOf($scope.focused)
+        if index == -1
+          next = groups[0]
+        else if index + 1 < groups.length
+          next = groups[index + 1]
+    return next
+
+  previousGroup = ->
+    prev = null
+    groups = nonEmpty()
+    if groups != null and groups.length > 0
+      if $scope.focused != null
+        index = groups.indexOf($scope.focused)
+        if index > 0
+          prev = groups[index - 1]
+    return prev
 
   markAllRead = () ->
     $http({method: "POST", url: "/api/mark_all_read.json", data: {groupId: $scope.current.id}})
@@ -70,13 +122,14 @@ Reader.controller "GroupsCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) 
   window.onresize = (e) ->
     fixGroupsHeight()
   setInterval ->
-    groups()
-  , 30000
+    $scope.refreshGroups()
+  , 5000
 ]
 
 Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus) ->
   $scope.current = null
   $scope.focused = null
+  $scope.column = null
 
   articles = (groupId, clear=false, lastId=0) ->
     if lastId == 0 or clear
@@ -96,6 +149,12 @@ Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus
           $scope.state = null
       .error () ->
         $scope.state = "error"
+
+  $scope.$on "setColumn", ->
+    $scope.column = Bus.obj
+    if $scope.column == "articles"
+      if $scope.focused == null and $scope.articles and $scope.articles.length > 0
+        $scope.focused = $scope.articles[0]
 
   $scope.loadMoreArticles = ->
     if $scope.articles.length > 0
@@ -149,41 +208,41 @@ Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus
     if $scope.groupId != null
       window.location.href = "/group/show/" + $scope.groupId
     
-
   $scope.$on "key", () ->
-    switch Bus.obj
-      when "n"
-        article = nextArticle()
-        if article != null
-          $scope.focused = article
-      when "p"
-        article = previousArticle()
-        if article != null
-          $scope.focused = article
-      when "j"
-        article = nextArticle()
-        if article != null
-          $scope.focused = article
-          $scope.current = article
-      when "k"
-        article = previousArticle()
-        if article != null
-          $scope.focused = article
-          $scope.current = article
-      when "o"
-        scrollTo($scope.focused)
-        if $scope.current != null and $scope.current == $scope.focused
-          $scope.current = null
-        else if $scope.focused != null
-          $scope.current = $scope.focused
-      when "v"
-        if $scope.focused != null
-          markAsRead($scope.focused)
-          window.open($scope.focused.url, "_blank")
-      when "r"
-        shareToPocket($scope.focused)
-      when "M"
-        $scope.loadMoreArticles()
+    if $scope.column == "articles"
+      switch Bus.obj
+        when "n"
+          article = nextArticle()
+          if article != null
+            $scope.focused = article
+        when "p"
+          article = previousArticle()
+          if article != null
+            $scope.focused = article
+        when "j"
+          article = nextArticle()
+          if article != null
+            $scope.focused = article
+            $scope.current = article
+        when "k"
+          article = previousArticle()
+          if article != null
+            $scope.focused = article
+            $scope.current = article
+        when "o"
+          scrollTo($scope.focused)
+          if $scope.current != null and $scope.current == $scope.focused
+            $scope.current = null
+          else if $scope.focused != null
+            $scope.current = $scope.focused
+        when "v"
+          if $scope.focused != null
+            markAsRead($scope.focused)
+            window.open($scope.focused.url, "_blank")
+        when "r"
+          shareToPocket($scope.focused)
+        when "M"
+          $scope.loadMoreArticles()
 
   $scope.chooseArticle = (article) ->
     if article != $scope.current
@@ -222,6 +281,22 @@ Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus
       }, 0)
 ]
 
+Reader.controller "ColumnCtrl", ["$scope", "Bus", ($scope, Bus) ->
+  $scope.column = null
+
+  $scope.$on "key", () ->
+    switch Bus.obj
+      when "h"
+        column = "groups"
+      when "l"
+        column = "articles"
+    if column and column != $scope.column
+      $scope.column = column
+
+  $scope.$watch "column", () ->
+    Bus.broadcast("setColumn", $scope.column)
+]
+
 Reader.controller "KeyCtrl", ["$scope", "$document", "Bus", ($scope, $document, Bus) ->
   which = {
     78: "n",
@@ -234,6 +309,8 @@ Reader.controller "KeyCtrl", ["$scope", "$document", "Bus", ($scope, $document, 
     82: "r",
     77: "m",
     85: "u",
+    72: "h",
+    76: "l",
   }
   $document.keydown (e) ->
     $scope.$apply ->

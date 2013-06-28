@@ -7,6 +7,8 @@ groups {
 
 .group {
     cursor: pointer;
+    border: solid 2px transparent;
+    padding-left: 4px;
 }
 
 .group:hover {
@@ -26,20 +28,24 @@ groups {
     font-weight: bold;
 }
 
+.group[data-column-selected=true][data-focused=true] {
+    border: solid 2px #054F8E;
+}
+
 articles {
     z-index: 200;
+}
+
+.article {
+    border: solid 2px transparent;
 }
 
 .article .title:hover {
     text-decoration: underline;
 }
 
-.article[data-focused=true] {
+.article[data-column-selected=true][data-focused=true] {
     border: solid 2px #054F8E;
-}
-
-.article[data-focused=false] {
-    border: solid 2px transparent;
 }
 
 .article[data-current=false] .article-contents {
