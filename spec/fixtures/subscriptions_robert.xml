@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+    <head>
+        <title>Robert subscriptions in Google Reader</title>
+    </head>
+    <body>
+        <outline text="Google Alerts - B. Todd Jones"
+            title="Google Alerts - B. Todd Jones" type="rss"
+            xmlUrl="http://www.google.com/reader/public/atom/user/13722468355078230769/state/com.google/alerts/5236086357890866165" htmlUrl="http://www.google.com/reader/view/user%2F13722468355078230769%2Fstate%2Fcom.google%2Falerts%2F5236086357890866165"/>
+        <outline title="Baseball Blogs" text="Baseball Blogs">
+            <outline text="All Rob Neyer Posts"
+                title="All Rob Neyer Posts" type="rss"
+                xmlUrl="http://www.sbnation.com/authors/rob-neyer/rss" htmlUrl="http://www.sbnation.com/"/>
+            <outline text="Big League Stew - MLB  - Yahoo! Sports"
+                title="Big League Stew - MLB  - Yahoo! Sports"
+                type="rss"
+                xmlUrl="http://sports.yahoo.com/mlb/blog/big_league_stew/rss.xml" htmlUrl="http://sports.yahoo.com/mlb/blog/big_league_stew"/>
+            <outline text="Bloomberg Sports" title="Bloomberg Sports"
+                type="rss"
+                xmlUrl="http://bloombergsports.mlblogs.com/atom.xml" htmlUrl="http://bloombergsports.mlblogs.com/"/>
+            <outline text="ESPN.com - Buster Olney Blog"
+                title="ESPN.com - Buster Olney Blog" type="rss"
+                xmlUrl="http://sports.espn.go.com/espn/rss/blog?name=olney_buster" htmlUrl="http://insider.espn.go.com/mlb/blog/_/name/olney_buster"/>
+            <outline text="HardballTalk" title="HardballTalk" type="rss"
+                xmlUrl="http://ctb.nbcsports.com/atom.xml" htmlUrl="http://hardballtalk.nbcsports.com/"/>
+            <outline text="MLB Trade Rumors" title="MLB Trade Rumors"
+                type="rss"
+                xmlUrl="http://www.mlbtraderumors.com/atom.xml" htmlUrl="http://www.mlbtraderumors.com/"/>
+            <outline text="SweetSpot" title="SweetSpot" type="rss"
+                xmlUrl="http://espn.go.com/blog/feed?blog=sweetspot" htmlUrl="http://espn.go.com/blog/sweetspot"/>
+        </outline>
+        <outline title="College Football" text="College Football">
+            <outline text="Dr. Saturday - NCAAF  - Yahoo! Sports"
+                title="Dr. Saturday - NCAAF  - Yahoo! Sports" type="rss"
+                xmlUrl="http://rivals.yahoo.com/ncaa/football/blog/dr_saturday/rss.xml" htmlUrl="http://rivals.yahoo.com/ncaa/football/blog/dr_saturday"/>
+            <outline text="Every Day Should Be Saturday"
+                title="Every Day Should Be Saturday" type="rss"
+                xmlUrl="http://feeds.feedburner.com/sportsblogs/everydayshouldbesaturday.xml" htmlUrl="http://www.everydayshouldbesaturday.com/"/>
+            <outline text="Gridiron Gold" title="Gridiron Gold"
+                type="rss"
+                xmlUrl="http://www.startribune.com/rss/?did=52614027" htmlUrl="http://www.startribune.com/sports/blogs/Gridiron_Gold.html"/>
+            <outline text="NBC Sports - College Football Talk"
+                title="NBC Sports - College Football Talk" type="rss"
+                xmlUrl="http://collegefootballtalk.nbcsports.com/atom.xml" htmlUrl="http://collegefootballtalk.nbcsports.com/"/>
+            <outline text="The Quad" title="The Quad" type="rss"
+                xmlUrl="http://thequad.blogs.nytimes.com/feed/" htmlUrl="http://www.nytimes.com/pages/sports/ncaafootball/index.html?partner=rss&amp;emc=rss"/>
+        </outline>
+        <outline title="Twins Blogs" text="Twins Blogs">
+            <outline text="1500 ESPN SportsWire - Minnesota Twins"
+                title="1500 ESPN SportsWire - Minnesota Twins"
+                type="rss"
+                xmlUrl="http://feeds.feedburner.com/1500espn/sportswire/twins" htmlUrl="http://www.1500espn.com/sportswire"/>
+            <outline text="A Fan's View" title="A Fan's View" type="rss"
+                xmlUrl="http://www.startribune.com/rss/?did=78693312" htmlUrl="http://www.startribune.com/sports/twins/blogs/A_Fans_View.html"/>
+            <outline text="AaronGleeman.com" title="AaronGleeman.com"
+                type="rss"
+                xmlUrl="http://aarongleeman.com/aarongleeman.xml" htmlUrl="http://aarongleeman.com"/>
+            <outline text="Bollinger Beat" title="Bollinger Beat"
+                type="rss"
+                xmlUrl="http://bollingerbeat.mlblogs.com/feed/" htmlUrl="http://bollingerbeat.mlblogs.com"/>
+            <outline text="Hitting the Foul Pole"
+                title="Hitting the Foul Pole" type="rss"
+                xmlUrl="http://feeds.feedburner.com/HittingTheFoulPole" htmlUrl="http://hittingthefoulpole.com"/>
+            <outline text="Minnesota Twins Feed-MLBTradeRumors.com"
+                title="Minnesota Twins Feed-MLBTradeRumors.com"
+                type="rss"
+                xmlUrl="http://www.mlbtraderumors.com/twins.xml" htmlUrl="http://www.mlbtraderumors.com/"/>
+            <outline text="Twins Daily" title="Twins Daily" type="rss"
+                xmlUrl="http://twinsdaily.com/external.php?do=rss&amp;type=newcontent&amp;sectionid=1&amp;days=120&amp;count=10" htmlUrl="http://twinsdaily.com"/>
+            <outline text="Twins Daily Forums"
+                title="Twins Daily Forums" type="rss"
+                xmlUrl="http://twinsdaily.com/external.php?type=RSS2" htmlUrl="http://twinsdaily.com/"/>
+            <outline text="Twins Insider" title="Twins Insider"
+                type="rss"
+                xmlUrl="http://www.startribune.com/rss/?did=78692842" htmlUrl="http://www.startribune.com/sports/twins/blogs/Twins_Insider.html"/>
+            <outline text="TwinsCentric" title="TwinsCentric" type="rss"
+                xmlUrl="http://www.startribune.com/rss/?did=83822197" htmlUrl="http://www.startribune.com/sports/twins/blogs/TwinsCentric.html"/>
+        </outline>
+        <outline title="Notre Dame" text="Notre Dame">
+            <outline text="Chicago Breaking Sports"
+                title="Chicago Breaking Sports" type="rss"
+                xmlUrl="http://feeds.feedburner.com/chicagobreakingsports/IAqS" htmlUrl="http://ngux.chicagotribune.com/sports/college/?track=rss"/>
+            <outline text="ESPN.com - Notre Dame Football Blog"
+                title="ESPN.com - Notre Dame Football Blog" type="rss"
+                xmlUrl="http://espn.go.com/blog/feed?blog=notre-dame-football" htmlUrl="http://espn.go.com/blog/notre-dame-football"/>
+            <outline text="Her Loyal Sons" title="Her Loyal Sons"
+                type="rss"
+                xmlUrl="http://feeds.feedburner.com/HerLoyalSons" htmlUrl="http://www.herloyalsons.com/blog"/>
+            <outline text="Inside the Irish" title="Inside the Irish"
+                type="rss" xmlUrl="http://irish.nbcsports.com/feed/" htmlUrl="http://irish.nbcsports.com"/>
+            <outline text="Irish Sports Daily - Notre Dame"
+                title="Irish Sports Daily - Notre Dame" type="rss"
+                xmlUrl="http://irishsportsdaily.com/index.php?format=feed&amp;type=rss" htmlUrl="http://www.irishsportsdaily.com/component/content/frontpage"/>
+            <outline text="One Foot Down" title="One Foot Down"
+                type="rss" xmlUrl="http://www.onefootdown.com/atom/" htmlUrl="http://www.onefootdown.com/"/>
+            <outline text="Subway Domer - A Notre Dame Blog"
+                title="Subway Domer - A Notre Dame Blog" type="rss"
+                xmlUrl="http://subwaydomer.com/feed/rss.html" htmlUrl="http://www.subwaydomer.com/"/>
+        </outline>
+        <outline title="Hitfix Blogs" text="Hitfix Blogs">
+            <outline text="Awards Campaign" title="Awards Campaign"
+                type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/awards-campaign.rss" htmlUrl="http://www.hitfix.com/blogs/awards-campaign"/>
+            <outline
+                text="Latest Posts from Monkeys as Critics on Hitfix"
+                title="Latest Posts from Monkeys as Critics on Hitfix"
+                type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/monkeys-as-critics.rss" htmlUrl="http://www.hitfix.com/blogs/monkeys-as-critics"/>
+            <outline text="Motion/Captured" title="Motion/Captured"
+                type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/motion-captured.rss" htmlUrl="http://www.hitfix.com/blogs/motion-captured"/>
+            <outline text="Starr Raving" title="Starr Raving" type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/starr-raving.rss" htmlUrl="http://www.hitfix.com/blogs/starr-raving"/>
+            <outline text="The Fien Print" title="The Fien Print"
+                type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/the-fien-print.rss" htmlUrl="http://www.hitfix.com/blogs/the-fien-print"/>
+            <outline text="TV Tattle" title="TV Tattle" type="rss"
+                xmlUrl="http://www.hitfix.com/tv-tattle.rss" htmlUrl="http://www.hitfix.com/blogs/tv-tattle"/>
+            <outline text="What's Alan Watching"
+                title="What's Alan Watching" type="rss"
+                xmlUrl="http://www.hitfix.com/blogs/whats-alan-watching.rss" htmlUrl="http://www.hitfix.com/blogs/whats-alan-watching"/>
+        </outline>
+        <outline title="Sports" text="Sports">
+            <outline text="Canis Hoopus -  All Posts"
+                title="Canis Hoopus -  All Posts" type="rss"
+                xmlUrl="http://www.canishoopus.com/rss/current" htmlUrl="http://www.canishoopus.com/"/>
+            <outline text="Deadspin" title="Deadspin" type="rss"
+                xmlUrl="http://feeds.gawker.com/deadspin/vip" htmlUrl="http://deadspin.com"/>
+            <outline text="ESPN.com - Stats %26 Info"
+                title="ESPN.com - Stats %26 Info" type="rss"
+                xmlUrl="http://espn.go.com/blog/feed?blog=statsinfo" htmlUrl="http://espn.go.com/blog/statsinfo/"/>
+            <outline text="Harvard Sports Analysis Collective"
+                title="Harvard Sports Analysis Collective" type="rss"
+                xmlUrl="http://harvardsportsanalysis.wordpress.com/feed/" htmlUrl="http://harvardsportsanalysis.wordpress.com"/>
+            <outline text="Kissing Suzy Kolber"
+                title="Kissing Suzy Kolber" type="rss"
+                xmlUrl="http://feeds.feedburner.com/uproxx/ksk" htmlUrl="http://kissingsuzykolber.uproxx.com"/>
+            <outline text="MinnPost.com: Sports"
+                title="MinnPost.com: Sports" type="rss"
+                xmlUrl="http://feeds.minnpost.com/minnpost-sports" htmlUrl="http://www.minnpost.com/section/171/rss.xml"/>
+            <outline text="Sports Business Insider"
+                title="Sports Business Insider" type="rss"
+                xmlUrl="http://feeds.feedburner.com/businessinsider/sportspage" htmlUrl="http://www.businessinsider.com/sportspage"/>
+        </outline>
+        <outline title="Non-sports" text="Non-sports">
+            <outline text="FilmDrunk" title="FilmDrunk" type="rss"
+                xmlUrl="http://feeds.feedburner.com/uproxx/filmdrunk" htmlUrl="http://filmdrunk.uproxx.com"/>
+            <outline text="I Hope They Serve Beer In Hell"
+                title="I Hope They Serve Beer In Hell" type="rss"
+                xmlUrl="http://feeds.feedburner.com/beerinhell" htmlUrl="http://www.tuckermax.com"/>
+            <outline
+                text="Minneapolis Business News - Local Minneapolis News | The Minneapolis / St Paul Business Journal"
+                title="Minneapolis Business News - Local Minneapolis News | The Minneapolis / St Paul Business Journal"
+                type="rss"
+                xmlUrl="http://feeds.bizjournals.com/bizj_twincities" htmlUrl="http://www.bizjournals.com/rss/feed/daily/twincities"/>
+            <outline text="MinnPost.com: Business"
+                title="MinnPost.com: Business" type="rss"
+                xmlUrl="http://feeds.minnpost.com/minnpost-business" htmlUrl="http://www.minnpost.com/section/170/rss.xml"/>
+            <outline text="Splitsider" title="Splitsider" type="rss"
+                xmlUrl="http://feeds.feedburner.com/Splitsider" htmlUrl="http://splitsider.com/"/>
+        </outline>
+    </body>
+</opml>

@@ -1,5 +1,5 @@
 require "form"
-require "rexml/document"
+require "opml"
 
 class ImportController < ApplicationController
   before_filter :require_login
@@ -9,30 +9,29 @@ class ImportController < ApplicationController
   end
 
   def upload
-    opml = REXML::Document.new(File.read(params[:import_form][:opml].tempfile))
-    feed_urls = []
-    opml.elements["opml/body"].elements.each("outline") do |e|
-      feed_urls << e.attributes["xmlUrl"]
-      model = Feed.find_by_feed_url(e.attributes["xmlUrl"])
-      if model.nil?
-        model = Feed.new(
-          :title => e.attributes["title"],
-          :url => e.attributes["htmlUrl"],
-          :feed_url => e.attributes["xmlUrl"],
-        )
-        model.save
-      end
-
-      group = Group.new(
+    parser = Opml::Parser.new
+    groups = parser.parse(File.read(params[:import_form][:opml].tempfile))
+    groups.each do |group|
+      group_model = Group.new(
         :user_id => current_user.id,
         :public => false,
-        :name => model.title,
+        :name => group.title,
         :index_num => Group.next_index(current_user.id),
       )
 
-      group.feeds << model
+      group.feeds.each do |feed|
+        feed_model = Feed.find_by_feed_url(feed.feed_url)
+        if feed_model.nil?
+          feed_model = Feed.new(
+            :title => feed.title,
+            :url => feed.url,
+            :feed_url => feed.feed_url,
+          )
+        end
+        group_model.feeds << feed_model
+      end
 
-      group.save
+      group_model.save
     end
 
     redirect_to "/reader"

@@ -49,3 +49,8 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-unicorn', :require => false
 end
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+end
