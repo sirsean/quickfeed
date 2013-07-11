@@ -20,6 +20,7 @@ class Feed < ActiveRecord::Base
         end
       end
     rescue => e
+      puts self.inspect
       puts e.message
       puts e.backtrace.join("\s")
     end
