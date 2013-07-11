@@ -19,8 +19,9 @@ class Feed < ActiveRecord::Base
           self.items << item
         end
       end
+      puts "Updated feed #{self.id}: #{self.title} (#{self.feed_url})"
     rescue => e
-      puts self.inspect
+      puts "FAILED feed #{self.id}: #{self.title} (#{self.feed_url})"
       puts e.message
       puts e.backtrace.join("\s")
     end
