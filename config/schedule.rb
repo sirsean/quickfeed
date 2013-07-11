@@ -19,6 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, { :standard => "log/whenever.log", :error => "log/whenever_error.log" }
+
 every 1.minute do
   rake "cron:one"
 end
