@@ -197,6 +197,7 @@ Reader.controller "ArticlesCtrl", ["$scope", "$http", "Bus", ($scope, $http, Bus
       $(".article[data-article-id=" + $scope.current.id + "] .full").show()
       scrollTo($scope.current)
       markAsRead($scope.current)
+      Bus.broadcast("setColumn", "articles")
 
   $scope.$on "markAllArticlesRead", () ->
     article.unread = 0 for article in $scope.articles
