@@ -21,7 +21,7 @@
     </thead>
     <tbody>
       <% @group.feeds.each do |feed| %>
-      <tr class="<%= "error" if feed.num_errors > 0 %>">
+      <tr class="<%= row_error_class feed.num_errors %>">
         <td><a href="<%= feed.url %>" target="_blank"><%= @feed_names[feed.id] %></a></td>
         <td><a href="<%= feed.feed_url %>" target="_blank"><%= feed.feed_url %></a></td>
         <td>
