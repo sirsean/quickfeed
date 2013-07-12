@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625023908) do
+ActiveRecord::Schema.define(:version => 20130712141832) do
 
   create_table "app_consumer_keys", :force => true do |t|
     t.string   "app"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130625023908) do
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.datetime "last_fetched_at", :default => '2000-01-01 06:00:00'
+    t.integer  "num_errors",      :default => 0
   end
 
   add_index "feeds", ["feed_url"], :name => "index_feeds_on_feed_url", :unique => true

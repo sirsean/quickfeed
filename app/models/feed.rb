@@ -1,5 +1,5 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :title, :url, :feed_url, :last_fetched_at
+  attr_accessible :title, :url, :feed_url, :last_fetched_at, :num_errors
   has_and_belongs_to_many :groups
   has_many :items
 
@@ -20,10 +20,12 @@ class Feed < ActiveRecord::Base
         end
       end
       puts "Updated feed #{self.id}: #{self.title} (#{self.feed_url})"
+      self.num_errors = 0
     rescue => e
       puts "FAILED feed #{self.id}: #{self.title} (#{self.feed_url})"
       puts e.message
       puts e.backtrace.join("\s")
+      self.num_errors += 1
     end
   end
 
@@ -48,7 +50,7 @@ class Feed < ActiveRecord::Base
 
     num_total_feeds = Feed.num_feeds_with_at_least_one_group
 
-    models = self.least_recently_fetched(num_total_feeds / 15)
+    models = self.least_recently_fetched(num_total_feeds / 15, Time.now - 15.minutes)
 
     # first, update the last_fetched_at field so if this takes too long
     # the next run will just skip on to the next batch instead of repeating
@@ -74,15 +76,18 @@ class Feed < ActiveRecord::Base
   def self.num_feeds_with_at_least_one_group
     self.find_by_sql(["select count(distinct(feeds.id)) as num
       from feeds
-      join feeds_groups on feeds_groups.feed_id=feeds.id"]).first.num
+      join feeds_groups on feeds_groups.feed_id=feeds.id
+      where feeds.feed_url is not null"]).first.num
   end
 
-  def self.least_recently_fetched(limit)
+  def self.least_recently_fetched(limit, not_after=Time.now)
     self.find_by_sql(["select distinct feeds.*
       from feeds
       join feeds_groups on feeds_groups.feed_id=feeds.id
-      order by last_fetched_at asc
-      limit :limit", {:limit => limit}])
+      where feeds.feed_url is not null
+      and feeds.last_fetched_at < :not_after
+      order by unix_timestamp(last_fetched_at) + least(12*3600, feeds.num_errors * 5*60) asc
+      limit :limit", {:limit => limit, :not_after => not_after}])
   end
 
   def self.by_user_id(user_id)
