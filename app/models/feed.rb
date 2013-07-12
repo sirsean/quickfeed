@@ -30,7 +30,7 @@ class Feed < ActiveRecord::Base
   def self.update_all
     puts "Updating all feeds"
     models = self.all
-    feeds = Feedzirra::Feed.fetch_and_parse(models.map{|m| m.feed_url})
+    feeds = Feedzirra::Feed.fetch_and_parse(models.map{|m| m.feed_url}.compact)
     models.each do |model|
       puts model.inspect
       if feeds.has_key?(model.feed_url)
@@ -58,7 +58,7 @@ class Feed < ActiveRecord::Base
       model.save
     end
 
-    feeds = Feedzirra::Feed.fetch_and_parse(models.map{|m| m.feed_url})
+    feeds = Feedzirra::Feed.fetch_and_parse(models.map{|m| m.feed_url}.compact)
     models.each do |model|
       if feeds.has_key?(model.feed_url)
         model.merge(feeds[model.feed_url])
