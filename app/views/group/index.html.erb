@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     <% @groups.each do |group| %>
-    <tr data-group-id="<%= group.id %>">
+    <tr data-group-id="<%= group.id %>" class="<%= "error" if group.feeds.inject(0){|x,y|x+y.num_errors} > 0 %>">
       <td><%= group.index_num + 1 %></td>
       <td><%= link_to group.name, "/group/show/#{group.id}" %></td>
       <td>

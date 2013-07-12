@@ -21,9 +21,9 @@
     </thead>
     <tbody>
       <% @group.feeds.each do |feed| %>
-      <tr>
-        <td><%= @feed_names[feed.id] %></td>
-        <td><%= feed.feed_url %></td>
+      <tr class="<%= "error" if feed.num_errors > 0 %>">
+        <td><a href="<%= feed.url %>" target="_blank"><%= @feed_names[feed.id] %></a></td>
+        <td><a href="<%= feed.feed_url %>" target="_blank"><%= feed.feed_url %></a></td>
         <td>
           <%= link_to "Remove Feed", "/group/remove_feed/#{@group.id}/#{feed.id}", :confirm => "Are you sure you want to remove this feed?" %>
         </td>
