@@ -296,6 +296,9 @@ Reader.controller "ColumnCtrl", ["$scope", "Bus", ($scope, Bus) ->
 
   $scope.$watch "column", () ->
     Bus.broadcast("setColumn", $scope.column)
+
+  $scope.$on "setColumn", ->
+    $scope.column = Bus.obj
 ]
 
 Reader.controller "KeyCtrl", ["$scope", "$document", "Bus", ($scope, $document, Bus) ->
